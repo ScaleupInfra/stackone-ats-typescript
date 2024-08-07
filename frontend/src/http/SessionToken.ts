@@ -1,12 +1,5 @@
 /* eslint-disable */
 export const retrieveConnectSessionToken = async ({ username, provider }: { username: string, provider?: string }) => {
-  const payload = {
-    expires_in: 1800,
-    multiple: false,
-    origin_owner_id: 'infrasity-1001',
-    origin_owner_name: 'test-infrasity'
-  };
-
   const headers = {
     'accept': 'application/json',
     'content-type': 'application/json'
@@ -20,8 +13,7 @@ export const retrieveConnectSessionToken = async ({ username, provider }: { user
 
     const connectSessionResponse = await fetch(`${apiUrl}/stackone/connect-session`, {
       method: 'POST',
-      headers,
-      body: JSON.stringify(payload),
+      headers
     });
 
     if (!connectSessionResponse.ok) {

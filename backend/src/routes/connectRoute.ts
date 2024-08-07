@@ -4,6 +4,7 @@ import { InvalidRequestError, ForbiddenRequestError, TooManyRequestsError, Serve
 import { connectStackOneSession } from '../service/sessionTokenService';
 
 const router = express.Router();
+
 const isKnownError = (error: unknown): error is InvalidRequestError | ForbiddenRequestError | TooManyRequestsError | ServerError | NotImplementedError | UnhandledError => {
     return error instanceof InvalidRequestError ||
         error instanceof ForbiddenRequestError ||
@@ -14,11 +15,8 @@ const isKnownError = (error: unknown): error is InvalidRequestError | ForbiddenR
 };
 
 router.post('/connect-session', async (req: Request, res: Response) => {
-    
-    const { origin_owner_id, origin_owner_name } = req.body;
-
     try {
-        const sessionToken = await connectStackOneSession(origin_owner_id, origin_owner_name);
+        const sessionToken = await connectStackOneSession();
         res.status(200).send(sessionToken);
     } catch (error: unknown) {
         if (isKnownError(error)) {
@@ -29,4 +27,4 @@ router.post('/connect-session', async (req: Request, res: Response) => {
     }
 });
 
-export default router;  
+export default router;
