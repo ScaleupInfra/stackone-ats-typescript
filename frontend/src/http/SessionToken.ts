@@ -1,10 +1,5 @@
-/* eslint-disable */
-export const retrieveConnectSessionToken = async ({ username, provider }: { username: string, provider?: string }) => {
-  const headers = {
-    'accept': 'application/json',
-    'content-type': 'application/json'
-  };
 
+export const retrieveConnectSessionToken = async () => {
   try {
     const apiUrl = process.env.REACT_APP_API_BASE_URL;
     if (!apiUrl) {
@@ -13,7 +8,6 @@ export const retrieveConnectSessionToken = async ({ username, provider }: { user
 
     const connectSessionResponse = await fetch(`${apiUrl}/stackone/connect-session`, {
       method: 'POST',
-      headers
     });
 
     if (!connectSessionResponse.ok) {

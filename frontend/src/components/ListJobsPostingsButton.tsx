@@ -73,12 +73,12 @@ const ListJobsPostingsButton: React.FC<{ accountId: string }> = ({
               <div id={`job-card-${index}`} className="job-card">
                 <h2 className="job-title">{job.title}</h2>
                 <p>
-                  <strong>Job ID:</strong>{" "}
+                  <strong>JOB ID:</strong>{" "}   
                   <span
                     id={`truncated-text-${index}`}
                     className="truncated-text"
                   >
-                    {job.id}
+                    {job.remote_id}
                   </span>
                 </p>
                 <p>

@@ -2,10 +2,12 @@ import axios from "axios";
 import config from "../config";
 import { InvalidRequestError, ForbiddenRequestError, TooManyRequestsError, ServerError, NotImplementedError, UnhandledError } from '../errors/stackoneErrors';
 
-export const getSessionToken = async (origin_owner_id: string, origin_owner_name: string) => {
+export const getSessionToken = async () => {
 
     const url: string = config.STACKONE_BASE_URL + "/connect_sessions";
     try {
+        const origin_owner_id = config.ORIGIN_OWNER_ID  as string;;
+        const origin_owner_name = config.ORIGIN_OWNER_NAME  as string;;
         const response = await axios.post(url, {
             expires_in: 1800,
             multiple: false,

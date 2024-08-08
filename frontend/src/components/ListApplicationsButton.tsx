@@ -112,7 +112,7 @@ const ListApplicationsButton: React.FC<ListApplicationsButtonProps> = ({
                 <div className="flex flex-col">
                   <strong>Job ID:</strong>
                   <span className="font-normal truncated-text">
-                    {truncateId(application.job_id)}
+                    {truncateId(application.remote_id)}
                   </span>
                 </div>
                 <div className="flex flex-col">
