@@ -1,6 +1,6 @@
 import React from "react";
 import aeroDown from "../resources/Icons/arrowdown.svg";
-import applyIcon from "../resources/Icons/arrowdown.svg"; // Ensure this file exists in the path
+import applyIcon from "../resources/Icons/arrowdown.svg";
 
 interface SidebarProps {
   showManageATS: boolean;
@@ -13,7 +13,7 @@ const CommonSidebar: React.FC<SidebarProps> = ({
   showManageATS,
   setShowManageATS,
   showApplyForJobs,
-  setShowApplyForJobs
+  setShowApplyForJobs,
 }) => {
   return (
     <div className="rounded-sm text-gray-900 w-1/7 p-4 flex flex-col items-center mr-20px">

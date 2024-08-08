@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import CommonSidebar from '../components/CommonSidebar';
 import ManageATSContent from './ManageJobs';
+import CandidateView from './CandidateView';
 
 const MainPage: React.FC = () => {
   const [showManageATS, setShowManageATS] = useState(true);
@@ -17,8 +18,7 @@ const MainPage: React.FC = () => {
       <div className="flex-1 ml-1/7 bg-white">
         {showApplyForJobs ? (
           <div className="p-6 rounded-lg shadow-md">
-            <h2 className="text-2xl font-bold mb-4">Apply for Jobs</h2>
-            {/* Your Apply for Jobs content goes here */}
+            <CandidateView/>
           </div>
         ) : showManageATS ? (
           <ManageATSContent />
