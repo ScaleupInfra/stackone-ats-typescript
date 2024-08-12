@@ -1,6 +1,6 @@
 import express from 'express';
 import { InvalidRequestError, ForbiddenRequestError, PreconditionFailedError, TooManyRequestsError, ServerError, NotImplementedError, UnhandledError } from '../errors/stackoneErrors';
-import { listAllApplications, listAllJobs, listPostedJobs } from '../service/atsService';
+import { listAllApplications, listAllJobs, listPostedJobs,createApplication } from '../service/atsService';
 import { Request, Response } from 'express';
 
 const router = express.Router();
@@ -67,4 +67,24 @@ router.get('/job_postings', async (req: Request, res: Response) => {
     }
 });
 
+
+
+router.post('/applications', async (req: Request, res: Response) => {
+    const { headers, body } = req;
+    const accountId: string = headers['x-account-id'] as string;
+    const applicationData = body;
+
+    try {
+        const newApplication = await createApplication(accountId, applicationData);
+        res.status(201).send(newApplication);
+    } catch (error: unknown) {
+        if (isKnownError(error)) {
+            res.status(error.status).json({ code: error.code, message: error.message });
+        } else {
+            res.status(500).json({ message: 'An unexpected error occurred.' });
+        }
+    }
+});
+
 export default router;
+
