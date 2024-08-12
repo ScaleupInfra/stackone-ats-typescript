@@ -241,7 +241,3 @@ const postApplication = async (accountId: string, applicationData: any) => {
     }
 }
 
-
-
-
-
