@@ -10,7 +10,10 @@ This application is a demonstration of how to integrate the StackOne unified API
 This web application showcases two primary user interfaces:
 
 1.  **Candidate View**:
-     ![image](https://github.com/user-attachments/assets/df179025-abc6-4651-930b-4fb6488f1552)
+   
+    ![image](https://github.com/user-attachments/assets/f83655f4-c63d-4a51-bb64-e4f2b9f9dad6)
+
+     
 
 
 
@@ -18,6 +21,7 @@ This web application showcases two primary user interfaces:
 *   Submitted applications are stored in the selected ATS provider's system, such as Greenhouse.
 
 2.  **HR View**:
+   
      ![image](https://github.com/user-attachments/assets/982401bf-e52f-42b5-aa9f-e1abd49c33bb)
 
      ![image](https://github.com/user-attachments/assets/894f8f5f-3516-4e4c-8b58-8e4f8bd862df)
