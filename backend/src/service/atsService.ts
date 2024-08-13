@@ -17,6 +17,6 @@ export const listPostedJobs = async (accountId: string, next: string) => {
 };
 
 
-export const createApplication = async (accountId: string, applicationData: any) => {
+export const createApplication = async (accountId: string, applicationData: unknown) => {
   return await postApplication(accountId, applicationData);
 };

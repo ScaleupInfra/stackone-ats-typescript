@@ -1,11 +1,11 @@
 export const listApplications = async (accountId: string) => {
   try {
-    const apiUrl = process.env.REACT_APP_API_BASE_URL;
+    const apiUrl = process.env.REACT_APP_API_ATS_URL;
     if (!apiUrl) {
       throw new Error('API base URL is not defined in environment variables');
     }
 
-    const response = await fetch(`${apiUrl}/stackone/applications`, {
+    const response = await fetch(`${apiUrl}/applications`, {
       method: 'GET',
       headers: {
         'x-account-id': accountId,

@@ -7,7 +7,7 @@ const LinkAccountButton: React.FC = () => {
 
   const startFlow = useCallback(async () => {  
     try {
-      const sessionToken = await retrieveConnectSessionToken( );
+      const sessionToken = await retrieveConnectSessionToken();
       startConnect({ sessionToken: sessionToken.token });
     } catch (error) {
       console.error('Error starting connect flow:', error);

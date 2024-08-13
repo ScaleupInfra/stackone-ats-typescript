@@ -28,7 +28,7 @@ const ManageATSContent: React.FC = () => {
     setShowDropdown(!showDropdown);
   };
 
-  const handleManageATSClick = () => {
+  const ManageATSClick = () => {
     setShowLinkAccount(!showLinkAccount);
   };
 
@@ -51,7 +51,7 @@ const ManageATSContent: React.FC = () => {
     }
   };
 
-  const handleAccountClick = (id: string, name: string) => {
+  const AccountClick = (id: string, name: string) => {
     setSelectedAccountId(id);
     setSelectedAccountName(name);
     setShowDropdown(false);
@@ -91,7 +91,7 @@ const ManageATSContent: React.FC = () => {
       <div className="flex justify-between mb-6 mt-5">
         <button
           className="bg-[#FFFFFF] text-[#05C168] border border-[#05C168] px-4 py-2 rounded shadow hover:bg-[#05C168] hover:text-[#FFFFFF] transition-all duration-300"
-          onClick={handleManageATSClick}
+          onClick={ManageATSClick}
         >
           Manage Jobs Portal
         </button>
@@ -110,7 +110,7 @@ const ManageATSContent: React.FC = () => {
                     key={account.id}
                     className="px-4 py-2 hover:bg-[#E3FFF2] cursor-pointer text-[#05C168]"
                     onClick={() =>
-                      handleAccountClick(account.id, account.provider)
+                      AccountClick(account.id, account.provider)
                     }
                   >
                     {account.provider}

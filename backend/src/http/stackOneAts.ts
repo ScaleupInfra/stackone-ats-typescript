@@ -1,6 +1,6 @@
 import axios from "axios";
 import config from '../config';
-import { InvalidRequestError, ForbiddenRequestError, PreconditionFailedError, TooManyRequestsError, ServerError, NotImplementedError, UnhandledError } from '../errors/stackoneErrors';
+import { AxiosError } from '../errors/axiosErrorHandler';
 
 export const getJobs = async (accountId: string, next: string) => {
     let url: string = config.STACKONE_ATS_URL + "/jobs?page_size=25";
@@ -19,27 +19,7 @@ export const getJobs = async (accountId: string, next: string) => {
         });
         return response.data;
     } catch (error) {
-        if (axios.isAxiosError(error)) {
-            const errorMessage = error.response?.data?.message || 'An error occurred';
-            switch (error.response?.status) {
-                case 400:
-                    throw new InvalidRequestError(errorMessage);
-                case 403:
-                    throw new ForbiddenRequestError(errorMessage);
-                case 412:
-                    throw new PreconditionFailedError(errorMessage);
-                case 429:
-                    throw new TooManyRequestsError(errorMessage);
-                case 500:
-                    throw new ServerError(errorMessage);
-                case 501:
-                    throw new NotImplementedError(errorMessage);
-                default:
-                    throw new UnhandledError(`Unexpected error: ${error.response?.status} - ${errorMessage}`);
-            }
-        } else {
-            throw new UnhandledError(`Unexpected error: ${error}`);
-        }
+        AxiosError(error);
     }
 }
 
@@ -59,27 +39,7 @@ export const getApplications = async (accountId: string, next: string) => {
         });
         return response.data;
     } catch (error) {
-        if (axios.isAxiosError(error)) {
-            const errorMessage = error.response?.data?.message || 'An error occurred';
-            switch (error.response?.status) {
-                case 400:
-                    throw new InvalidRequestError(errorMessage);
-                case 403:
-                    throw new ForbiddenRequestError(errorMessage);
-                case 412:
-                    throw new PreconditionFailedError(errorMessage);
-                case 429:
-                    throw new TooManyRequestsError(errorMessage);
-                case 500:
-                    throw new ServerError(errorMessage);
-                case 501:
-                    throw new NotImplementedError(errorMessage);
-                default:
-                    throw new UnhandledError(`Unexpected error: ${error.response?.status} - ${errorMessage}`);
-            }
-        } else {
-            throw new UnhandledError(`Unexpected error: ${error}`);
-        }
+        AxiosError(error);
     }
 }
 
@@ -101,32 +61,12 @@ export const getPostedJobs = async (accountId: string, next: string) => {
         });
         return response.data;
     } catch (error) {
-        if (axios.isAxiosError(error)) {
-            const errorMessage = error.response?.data?.message || 'An error occurred';
-            switch (error.response?.status) {
-                case 400:
-                    throw new InvalidRequestError(errorMessage);
-                case 403:
-                    throw new ForbiddenRequestError(errorMessage);
-                case 412:
-                    throw new PreconditionFailedError(errorMessage);
-                case 429:
-                    throw new TooManyRequestsError(errorMessage);
-                case 500:
-                    throw new ServerError(errorMessage);
-                case 501:
-                    throw new NotImplementedError(errorMessage);
-                default:
-                    throw new UnhandledError(`Unexpected error: ${error.response?.status} - ${errorMessage}`);
-            }
-        } else {
-            throw new UnhandledError(`Unexpected error: ${error}`);
-        }
+        AxiosError(error);
     }
 }
 
 
-
+// eslint-disable-next-line
 export const postApplication = async (accountId: string, applicationData: any) => {
     const url: string = config.STACKONE_ATS_URL + "/applications";
 
@@ -141,26 +81,6 @@ export const postApplication = async (accountId: string, applicationData: any) =
         });
         return response.data;
     } catch (error) {
-        if (axios.isAxiosError(error)) {
-            const errorMessage = error.response?.data?.message || 'An error occurred';
-            switch (error.response?.status) {
-                case 400:
-                    throw new InvalidRequestError(errorMessage);
-                case 403:
-                    throw new ForbiddenRequestError(errorMessage);
-                case 412:
-                    throw new PreconditionFailedError(errorMessage);
-                case 429:
-                    throw new TooManyRequestsError(errorMessage);
-                case 500:
-                    throw new ServerError(errorMessage);
-                case 501:
-                    throw new NotImplementedError(errorMessage);
-                default:
-                    throw new UnhandledError(`Unexpected error: ${error.response?.status} - ${errorMessage}`);
-            }
-        } else {
-            throw new UnhandledError(`Unexpected error: ${error}`);
-        }
+        AxiosError(error);
     }
 }

@@ -1,6 +1,5 @@
 import { listAccounts } from './listAccounts';
 
-
 export const fetchAccountIds = async (): Promise<string[]> => {
   try {
     const accountsData = await listAccounts();
@@ -11,14 +10,13 @@ export const fetchAccountIds = async (): Promise<string[]> => {
   }
 };
 
-
+// eslint-disable-next-line
 export const fetchJobsForAllAccounts = async (): Promise<any[]> => {
   try {
     const accountIds = await fetchAccountIds();
     
-
     const jobPostingsPromises = accountIds.map(async (id) => {
-      const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/stackone/job_postings`, {
+      const response = await fetch(`${process.env.REACT_APP_API_ATS_URL}/job-postings`, {
         method: 'GET',
         headers: {
           'x-account-id': id,
@@ -26,7 +24,7 @@ export const fetchJobsForAllAccounts = async (): Promise<any[]> => {
       });
       const data = await response.json();
       
-      
+      // eslint-disable-next-line
       return (data.data || []).map((job: any) => ({
         ...job,
         accountId: id, 

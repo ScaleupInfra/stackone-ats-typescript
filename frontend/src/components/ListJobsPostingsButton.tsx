@@ -37,7 +37,7 @@ const ListJobsPostingsButton: React.FC<{ accountId: string }> = ({
   const [jobs, setJobs] = useState<Job[]>([]);
   const [visibleJobs, setVisibleJobs] = useState<number>(2);
 
-  const handleFetchJobs = async () => {
+  const FetchJobs = async () => {
     try {
       const jobsData = await listJobsPostings(accountId);
       if (Array.isArray(jobsData.data)) {
@@ -48,16 +48,16 @@ const ListJobsPostingsButton: React.FC<{ accountId: string }> = ({
     }
   };
 
-  const handleShowMore = () => {
+  const ShowMore = () => {
     setVisibleJobs((prev) => Math.min(prev + 2, jobs.length));
   };
 
-  const handleShowLess = () => {
+  const ShowLess = () => {
     setVisibleJobs((prev) => Math.max(prev - 2, 2));
   };
 
   useEffect(() => {
-    handleFetchJobs();
+    FetchJobs();
   }, [accountId]);
 
   return (
@@ -104,12 +104,12 @@ const ListJobsPostingsButton: React.FC<{ accountId: string }> = ({
       )}
       <div className="flex justify-between mt-4">
         {jobs.length > 0 && visibleJobs < jobs.length && (
-          <button className="show-more-button" onClick={handleShowMore}>
+          <button className="show-more-button" onClick={ShowMore}>
             <img src={aeroDown} alt="Show more" className="icon-size" />
           </button>
         )}
         {jobs.length > 0 && visibleJobs > 2 && (
-          <button className="show-more-button" onClick={handleShowLess}>
+          <button className="show-more-button" onClick={ShowLess}>
             <img src={aeroDown} alt="Show less" className="icon-size rotate-180" />
           </button>
         )}

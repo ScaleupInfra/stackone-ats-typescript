@@ -53,31 +53,31 @@ const ViewJob: React.FC = () => {
     accountId: string;
   };
 
-  const handleBackClick = () => {
+  const BackClick = () => {
     navigate(-1);
   };
 
-  const handleApplyClick = () => {
+  const ApplyClick = () => {
     setShowForm(true);
   };
 
-  const handleCloseForm = () => {
+  const CloseForm = () => {
     setShowForm(false);
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const InputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const FileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (files && files.length > 0) {
       setFormData((prev) => ({ ...prev, resume: files[0] }));
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const Submit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
@@ -103,21 +103,21 @@ const ViewJob: React.FC = () => {
         type: "success",
       });
       console.log("Application submitted successfully");
-      handleCloseForm();
+      CloseForm();
     } catch (error) {
       console.error("Error submitting application:", error);
       setMessage({
         text: "Error submitting application. Please try again later.",
         type: "error",
       });
-      handleCloseForm();
+      CloseForm();
     }
   };
 
   return (
     <div className="p-6">
       <button
-        onClick={handleBackClick}
+        onClick={BackClick}
         className="bg-[#E3FFF2] text-[#05C168] border-2 border-[#05C168] px-4 py-2 rounded-md mb-4"
       >
         Back
@@ -153,7 +153,7 @@ const ViewJob: React.FC = () => {
           </p>
         </div>
         <button
-          onClick={handleApplyClick}
+          onClick={ApplyClick}
           className="bg-[#05C168] text-white border-2 border-[#05C168] px-4 py-2 rounded-md mt-4"
         >
           Apply
@@ -163,11 +163,11 @@ const ViewJob: React.FC = () => {
       {showForm && (
         <div className="form-overlay">
           <div className="form-card">
-            <button onClick={handleCloseForm} className="form-close-button">
+            <button onClick={CloseForm} className="form-close-button">
               &times;
             </button>
             <h2 className="form-title">Application Form</h2>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={Submit}>
               <div className="form-group">
                 <label
                   htmlFor="jobId"
@@ -180,7 +180,7 @@ const ViewJob: React.FC = () => {
                   id="jobId"
                   name="jobId"
                   value={formData.jobId}
-                  onChange={handleInputChange}
+                  onChange={InputChange}
                   className="form-input"
                 />
               </div>
@@ -196,7 +196,7 @@ const ViewJob: React.FC = () => {
                   id="country"
                   name="country"
                   value={formData.country}
-                  onChange={handleInputChange}
+                  onChange={InputChange}
                   className="form-input"
                 />
               </div>
@@ -212,7 +212,7 @@ const ViewJob: React.FC = () => {
                   id="title"
                   name="title"
                   value={formData.title}
-                  onChange={handleInputChange}
+                  onChange={InputChange}
                   className="form-input"
                 />
               </div>
@@ -228,7 +228,7 @@ const ViewJob: React.FC = () => {
                   id="firstName"
                   name="firstName"
                   value={formData.firstName}
-                  onChange={handleInputChange}
+                  onChange={InputChange}
                   className="form-input"
                 />
               </div>
@@ -244,7 +244,7 @@ const ViewJob: React.FC = () => {
                   id="lastName"
                   name="lastName"
                   value={formData.lastName}
-                  onChange={handleInputChange}
+                  onChange={InputChange}
                   className="form-input"
                 />
               </div>
@@ -260,7 +260,7 @@ const ViewJob: React.FC = () => {
                   id="email"
                   name="email"
                   value={formData.email}
-                  onChange={handleInputChange}
+                  onChange={InputChange}
                   className="form-input"
                 />
               </div>
@@ -276,7 +276,7 @@ const ViewJob: React.FC = () => {
                   id="phone"
                   name="phone"
                   value={formData.phone}
-                  onChange={handleInputChange}
+                  onChange={InputChange}
                   className="form-input"
                 />
               </div>
@@ -291,7 +291,7 @@ const ViewJob: React.FC = () => {
                   type="file"
                   id="resume"
                   name="resume"
-                  onChange={handleFileChange}
+                  onChange={FileChange}
                   className="form-input"
                 />
               </div>

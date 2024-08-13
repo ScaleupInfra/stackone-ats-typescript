@@ -12,7 +12,7 @@ const MainPage: React.FC = () => {
       </div>
       <div className="flex-1 ml-1/7 bg-white">
         <Routes>
-          <Route path="manage-jobs" element={<ManageATSContent />} />
+          <Route path="/" element={<ManageATSContent />} />
           <Route path="apply-jobs" element={
             <div
               className="p-6 rounded-lg shadow-md"
@@ -25,7 +25,6 @@ const MainPage: React.FC = () => {
               <CandidateView />
             </div>
           } />
-          {/* Add other routes here if needed */}
         </Routes>
       </div>
     </div>

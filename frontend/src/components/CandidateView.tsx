@@ -1,5 +1,4 @@
 import React from "react";
-
 import Contact from "./Contact";
 import ListCandidateJobsButton from "./ListCandidateJobs";
 import mail from "../resources/Icons/mail.svg";

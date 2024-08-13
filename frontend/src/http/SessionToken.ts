@@ -1,12 +1,12 @@
 
 export const retrieveConnectSessionToken = async () => {
   try {
-    const apiUrl = process.env.REACT_APP_API_BASE_URL;
+    const apiUrl = process.env.REACT_APP_API_SESSION_URL;
     if (!apiUrl) {
       throw new Error('API base URL is not defined in environment variables');
     }
 
-    const connectSessionResponse = await fetch(`${apiUrl}/stackone/connect-session`, {
+    const connectSessionResponse = await fetch(`${apiUrl}/connect-session`, {
       method: 'POST',
     });
 

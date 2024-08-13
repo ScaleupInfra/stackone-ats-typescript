@@ -50,7 +50,7 @@ router.get('/applications', async (req: Request, res: Response) => {
 });
 
 
-router.get('/job_postings', async (req: Request, res: Response) => {
+router.get('/job-postings', async (req: Request, res: Response) => {
     const { query, headers } = req;
     const next: string = query.next as string;
     const accountId: string = headers['x-account-id'] as string;
