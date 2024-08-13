@@ -10,12 +10,17 @@ This application is a demonstration of how to integrate the StackOne unified API
 This web application showcases two primary user interfaces:
 
 1.  **Candidate View**:
+      ![image](https://github.com/user-attachments/assets/6f113613-c343-4102-ba3e-80fb379804c8)
+
 
 *   Candidates can browse and apply for jobs.
 *   Submitted applications are stored in the selected ATS provider's system, such as Greenhouse.
 
 2.  **HR View**:
+    ![image](https://github.com/user-attachments/assets/51d01bb7-c083-4458-94bb-1fa6308eccba) 
 
+
+    
 *   HR professionals can view posted jobs and receive applications.
 *   HRs have the flexibility to select any ATS provider to manage job postings and applications.
 *   This interface allows HR to add multiple ATS providers using a unified StackOne API.
@@ -196,6 +201,47 @@ const getApplications = async (accountId: string, next: string) => {
     }
 }
 ```
+### Get All Job Postings
+Retrieves all job postings from all the providers for the Candidate view.
+```
+const getPostedJobs = async (accountId: string, next: string) => {
+    let url: string = config.STACKONE_ATS_URL + "/job_postings?page_size=25";
 
+    if (next) {
+        url += `&next=${encodeURIComponent(next)}`;
+    }
 
+    try {
+        const response = await axios.get(url, {
+            headers: {
+                'accept': 'application/json',
+                'x-account-id': `${accountId}`,
+                'authorization': `Basic ${config.STACKONE_API_KEY}`,
+            }
+        });
+        return response.data;
+    } catch (error) {
+        // Handle error
+    }
+}
+```
+### Create Application
+This endpoint allows you to create an application for a job specific to an ATS provider.
+````
+const postApplication = async (accountId: string, applicationData: any) => {
+    const url: string = config.STACKONE_ATS_URL + "/applications";
 
+    try {
+        const response = await axios.post(url, applicationData, {
+            headers: {
+                'accept': 'application/json',
+                'x-account-id': `${accountId}`,
+                'authorization': `Basic ${config.STACKONE_API_KEY}`,
+                'content-type': 'application/json',
+            }
+        });
+        return response.data;
+    } catch (error) {
+        // Handle error
+    }
+}
