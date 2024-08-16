@@ -10,18 +10,39 @@ This application is a demonstration of how to integrate the StackOne unified API
 This web application showcases two primary user interfaces:
 
 1.  **Candidate View**:
+<<<<<<< HEAD
+=======
+   
+    ![image](https://github.com/user-attachments/assets/f83655f4-c63d-4a51-bb64-e4f2b9f9dad6)
+
+     
+
+
+>>>>>>> 1171837168cb49a935b4bca3e6a41fc8ab4237e1
 
 *   Candidates can browse and apply for jobs.
 *   Submitted applications are stored in the selected ATS provider's system, such as Greenhouse.
 
 2.  **HR View**:
+<<<<<<< HEAD
 
+=======
+   
+     ![image](https://github.com/user-attachments/assets/982401bf-e52f-42b5-aa9f-e1abd49c33bb)
+
+     ![image](https://github.com/user-attachments/assets/894f8f5f-3516-4e4c-8b58-8e4f8bd862df)
+
+    
+>>>>>>> 1171837168cb49a935b4bca3e6a41fc8ab4237e1
 *   HR professionals can view posted jobs and receive applications.
 *   HRs have the flexibility to select any ATS provider to manage job postings and applications.
 *   This interface allows HR to add multiple ATS providers using a unified StackOne API.
-  
-![stackone-result-ss-3-v1](https://github.com/user-attachments/assets/385071ea-fe01-4a74-8129-7d199c963c15)
-![stackone-result-ss-2-v1](https://github.com/user-attachments/assets/f29621f5-5364-446c-ad04-b2e0dd9df095)
+
+## Navigation
+
+- The **main route ('/')** will land on the **HR View**.
+- The **'/apply-jobs' route** will take the user to the **Candidate View**.
+
 
 ## Tech Stack
 
@@ -64,7 +85,12 @@ npm install
 *   Navigate to the `frontend` directory and create a `.env` file, and add the following variable:
 
 ```
+<<<<<<< HEAD
 REACT_APP_API_ATS_URL="http://localhost:3001"
+=======
+REACT_APP_API_BASE_URL="http://localhost:3001"
+REACT_APP_API_SESSION_URL="http://localhost:3001"
+>>>>>>> 1171837168cb49a935b4bca3e6a41fc8ab4237e1
 ```
 *   Install dependencies:
 ```
