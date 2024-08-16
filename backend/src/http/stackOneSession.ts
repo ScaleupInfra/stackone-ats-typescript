@@ -1,6 +1,6 @@
 import axios from "axios";
 import config from "../config";
-import { AxiosError } from '../errors/axiosErrorHandler';
+import { AxiosError } from './errorHandler';
 
 export const getSessionToken = async () => {
 

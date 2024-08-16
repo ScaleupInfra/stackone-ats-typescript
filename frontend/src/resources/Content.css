@@ -216,7 +216,7 @@
   background-color: #E3FFF2;
   color: #05C168;
   border: 2px solid #05C168;
-  padding: 10px 20px;
+  padding: 5px 10px;
   border-radius: 4px;
   margin-bottom: 20px;
   cursor: pointer;
@@ -247,7 +247,7 @@
 
 @media (min-width: 550px) {
   .btn-back {
-    padding: 12px 24px; 
+    padding: 6px 12px; 
     font-size: 1.2rem; 
   }
 
@@ -267,7 +267,7 @@
 
 @media (min-width: 820px) {
   .btn-back {
-    padding: 14px 28px; 
+    padding: 7px 15px; 
     font-size: 1.4rem; 
   }
 

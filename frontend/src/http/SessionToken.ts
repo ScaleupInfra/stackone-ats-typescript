@@ -1,4 +1,3 @@
-
 export const retrieveConnectSessionToken = async () => {
   try {
     const apiUrl = process.env.REACT_APP_API_SESSION_URL;

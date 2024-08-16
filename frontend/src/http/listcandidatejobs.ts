@@ -1,40 +1,41 @@
 import { listAccounts } from './listAccounts';
+import { getApiUrl, handleResponse, handleError } from '../utils/apiUtils'; 
+import { JobPosting } from '../components/ListCandidateJobs';
 
 export const fetchAccountIds = async (): Promise<string[]> => {
   try {
     const accountsData = await listAccounts();
     return accountsData.map((account: { id: string }) => account.id);
   } catch (error) {
-    console.error('Error fetching account IDs:', error);
+    handleError(error); 
     return [];
   }
 };
 
-// eslint-disable-next-line
-export const fetchJobsForAllAccounts = async (): Promise<any[]> => {
+export const fetchJobsForAllAccounts = async (): Promise<JobPosting[]> => {
   try {
     const accountIds = await fetchAccountIds();
-    
+    const apiUrl = getApiUrl();
+
     const jobPostingsPromises = accountIds.map(async (id) => {
-      const response = await fetch(`${process.env.REACT_APP_API_ATS_URL}/job-postings`, {
+      const response = await fetch(`${apiUrl}/job-postings`, {
         method: 'GET',
         headers: {
           'x-account-id': id,
         },
       });
-      const data = await response.json();
-      
-      // eslint-disable-next-line
-      return (data.data || []).map((job: any) => ({
+      const data = await handleResponse(response); 
+
+      return (data.data || []).map((job: JobPosting) => ({
         ...job,
-        accountId: id, 
+        accountId: id,
       }));
     });
 
     const jobPostingsData = await Promise.all(jobPostingsPromises);
-    return jobPostingsData.flat(); 
+    return jobPostingsData.flat();
   } catch (error) {
-    console.error('Error fetching jobs:', error);
+    handleError(error); 
     return [];
   }
 };

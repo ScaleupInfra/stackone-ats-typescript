@@ -20,7 +20,7 @@ interface Content {
   html: string;
 }
 
-interface JobPosting {
+export interface JobPosting {
   id: string;
   title: string;
   locations: Location[];
@@ -38,10 +38,10 @@ interface JobPosting {
 
 const ListJobsPostingsButton: React.FC = () => {
   const [jobs, setJobs] = useState<JobPosting[]>([]);
-  const [visibleJobs, setVisibleJobs] = useState<number>(2);
+  const [visibleJobs, setVisibleJobs] = useState<number>(4);
   const navigate = useNavigate();
 
-  const FetchJobs = async () => {
+  const fetchJobs = async () => {
     try {
       const jobsData = await fetchJobsForAllAccounts();
       setJobs(jobsData);
@@ -51,7 +51,7 @@ const ListJobsPostingsButton: React.FC = () => {
   };
 
   useEffect(() => {
-    FetchJobs();
+    fetchJobs();
   }, []);
 
   const truncateText = (text: string | undefined, maxLength: number = 50) => {
@@ -61,19 +61,19 @@ const ListJobsPostingsButton: React.FC = () => {
       : text;
   };
 
-  const ShowMore = () => {
+  const showMore = () => {
     setVisibleJobs((prev) => Math.min(prev + 2, jobs.length));
   };
 
-  const ShowLess = () => {
-    setVisibleJobs((prev) => Math.max(prev - 2, 2));
+  const showLess = () => {
+    setVisibleJobs(4);
   };
 
-  const ViewJobClick = (job: JobPosting) => {
+  const viewJobClick = (job: JobPosting) => {
     navigate(`/view-job/${job.job_id}`, {
       state: {
         jobDetails: job,
-        accountId: job.accountId, 
+        accountId: job.accountId,
       },
     });
   };
@@ -128,7 +128,7 @@ const ListJobsPostingsButton: React.FC = () => {
                 </div>
                 <button
                   className="bg-[#E3FFF2] text-[#05C168] border-2 border-[#05C168] px-4 py-2 rounded-md mt-4"
-                  onClick={() => ViewJobClick(job)}
+                  onClick={() => viewJobClick(job)}
                 >
                   View Job
                 </button>
@@ -140,12 +140,12 @@ const ListJobsPostingsButton: React.FC = () => {
       <div className="flex justify-between mt-4">
         <div className="see-more-container">
           {jobs.length > 0 && visibleJobs < jobs.length && (
-            <button className="show-more-button" onClick={ShowMore}>
+            <button className="show-more-button" onClick={showMore}>
               + See More
             </button>
           )}
-          {jobs.length > 0 && visibleJobs > 2 && (
-            <button className="show-more-button" onClick={ShowLess}>
+          {jobs.length > 0 && visibleJobs > 4 && (
+            <button className="show-more-button" onClick={showLess}>
               See Less
             </button>
           )}

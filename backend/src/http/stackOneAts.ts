@@ -1,6 +1,6 @@
 import axios from "axios";
 import config from '../config';
-import { AxiosError } from '../errors/axiosErrorHandler';
+import { AxiosError } from './errorHandler';
 
 export const getJobs = async (accountId: string, next: string) => {
     let url: string = config.STACKONE_ATS_URL + "/jobs?page_size=25";
@@ -66,8 +66,7 @@ export const getPostedJobs = async (accountId: string, next: string) => {
 }
 
 
-// eslint-disable-next-line
-export const postApplication = async (accountId: string, applicationData: any) => {
+export const postApplication = async (accountId: string, applicationData: unknown) => {
     const url: string = config.STACKONE_ATS_URL + "/applications";
 
     try {

@@ -1,6 +1,6 @@
 import axios from "axios";
 import config from "../config";
-import { AxiosError } from '../errors/axiosErrorHandler';
+import { AxiosError } from './errorHandler';
 
 export const getAllAccounts = async () => {
     const url: string = config.STACKONE_BASE_URL + "/accounts";
