@@ -1,4 +1,4 @@
-import { getApiUrl, handleResponse, handleError } from '../utils/apiUtils'; 
+import { getApiUrl, responseHandler,errorHandler } from '../utils/apiUtils'; 
 
 export const listAccounts = async () => {
     try {
@@ -7,8 +7,8 @@ export const listAccounts = async () => {
             method: 'GET',
         });
 
-        return await handleResponse(response);
+        return await responseHandler(response);
     } catch (error) {
-        handleError(error); 
+        errorHandler(error); 
     }
 };

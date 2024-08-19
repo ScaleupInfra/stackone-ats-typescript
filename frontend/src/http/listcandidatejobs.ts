@@ -1,5 +1,5 @@
 import { listAccounts } from './listAccounts';
-import { getApiUrl, handleResponse, handleError } from '../utils/apiUtils'; 
+import { getApiUrl, responseHandler, errorHandler } from '../utils/apiUtils'; 
 import { JobPosting } from '../components/ListCandidateJobs';
 
 export const fetchAccountIds = async (): Promise<string[]> => {
@@ -7,7 +7,7 @@ export const fetchAccountIds = async (): Promise<string[]> => {
     const accountsData = await listAccounts();
     return accountsData.map((account: { id: string }) => account.id);
   } catch (error) {
-    handleError(error); 
+    errorHandler(error); 
     return [];
   }
 };
@@ -24,7 +24,7 @@ export const fetchJobsForAllAccounts = async (): Promise<JobPosting[]> => {
           'x-account-id': id,
         },
       });
-      const data = await handleResponse(response); 
+      const data = await responseHandler(response); 
 
       return (data.data || []).map((job: JobPosting) => ({
         ...job,
@@ -35,7 +35,7 @@ export const fetchJobsForAllAccounts = async (): Promise<JobPosting[]> => {
     const jobPostingsData = await Promise.all(jobPostingsPromises);
     return jobPostingsData.flat();
   } catch (error) {
-    handleError(error); 
+    errorHandler(error); 
     return [];
   }
 };

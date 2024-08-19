@@ -1,4 +1,4 @@
-import { getApiUrl, handleResponse, handleError } from '../utils/apiUtils';
+import { getApiUrl, responseHandler, errorHandler } from '../utils/apiUtils';
 
 export const listJobsPostings = async (accountId: string) => {
   try {
@@ -11,10 +11,10 @@ export const listJobsPostings = async (accountId: string) => {
       },
     });
 
-    const data = await handleResponse(response); 
+    const data = await responseHandler(response); 
 
     return data;
   } catch (error) {
-    handleError(error); 
+    errorHandler(error); 
   }
 };

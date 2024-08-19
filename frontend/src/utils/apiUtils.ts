@@ -6,14 +6,14 @@ export const getApiUrl = (): string => {
     return apiUrl;
 };
 
-export const handleResponse = async (response: Response) => {
+export const responseHandler = async (response: Response) => {
     if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
     }
     return await response.json();
 };
 
-export const handleError = (error: unknown) => {
+export const errorHandler = (error: unknown) => {
     console.error('API Error:', error);
     throw error;
 };

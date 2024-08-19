@@ -1,4 +1,4 @@
-import { getApiUrl, handleResponse, handleError } from '../utils/apiUtils'; 
+import { getApiUrl, responseHandler, errorHandler } from '../utils/apiUtils'; 
 
 export const createApplication = async (accountId: string, applicationData: unknown) => {
     try {
@@ -13,9 +13,9 @@ export const createApplication = async (accountId: string, applicationData: unkn
             body: JSON.stringify(applicationData),
         });
 
-        const result = await handleResponse(response);
+        const result = await responseHandler(response);
         return result.id;
     } catch (error) {
-        handleError(error); 
+        errorHandler(error); 
     }
 };
