@@ -1,5 +1,5 @@
 import { listAccounts } from './listAccounts';
-import { getApiUrl, responseHandler, errorHandler } from '../utils/apiUtils'; 
+import { getApiUrl, responseHandler, errorHandler } from './errorHandler'; 
 import { JobPosting } from '../components/ListCandidateJobs';
 
 export const fetchAccountIds = async (): Promise<string[]> => {

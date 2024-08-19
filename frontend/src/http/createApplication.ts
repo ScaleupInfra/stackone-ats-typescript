@@ -1,4 +1,4 @@
-import { getApiUrl, responseHandler, errorHandler } from '../utils/apiUtils'; 
+import { getApiUrl, responseHandler, errorHandler } from './errorHandler'; 
 
 export const createApplication = async (accountId: string, applicationData: unknown) => {
     try {
