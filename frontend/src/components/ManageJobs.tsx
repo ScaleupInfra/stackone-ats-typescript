@@ -24,6 +24,7 @@ const ManageATSContent: React.FC = () => {
     "No account available"
   );
 
+
   const toggleDropdown = () => {
     setShowDropdown(!showDropdown);
   };
@@ -128,7 +129,11 @@ const ManageATSContent: React.FC = () => {
         )}
       </div>
 
-      {showLinkAccount && <LinkAccountButton />}
+      {showLinkAccount && (
+        <LinkAccountButton
+        setShowLinkAccount={setShowLinkAccount} 
+      />
+      )}
       {selectedAccountId && (
         <ListJobsPostingsButton accountId={selectedAccountId} />
       )}

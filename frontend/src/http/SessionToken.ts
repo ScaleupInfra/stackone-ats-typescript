@@ -4,14 +4,15 @@ export const retrieveConnectSessionToken = async () => {
     if (!apiUrl) {
       throw new Error('API base URL is not defined in environment variables');
     }
-
+    
     const connectSessionResponse = await fetch(`${apiUrl}/connect-session`, {
       method: 'POST',
     });
-
+    
     if (!connectSessionResponse.ok) {
       throw new Error(`HTTP error! status: ${connectSessionResponse.status}`);
     }
+
 
     const response = await connectSessionResponse.json();
 
