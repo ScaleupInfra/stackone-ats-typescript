@@ -51,7 +51,7 @@ These methods are time-consuming and resource-intensive, making updates and main
 
   ![Untitled Diagram drawio (5)](https://github.com/user-attachments/assets/fea7ee9b-82bf-470a-9f7e-735f97bc9917)
 
-- ### Exploring API Endpoints
+ ### Exploring API Endpoints
 
   StackOne enables seamless integration with multiple ATS platforms, allowing you to capture and manage accounts, job postings, and applications through a consistent API interface.
 
