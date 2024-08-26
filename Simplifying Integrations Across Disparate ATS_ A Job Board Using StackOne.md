@@ -15,8 +15,8 @@ To address this, we are creating a unified job board that brings together job li
    * For more detailed guidance on setting up these connections, refer to this [stackone-60.mintlify.app/dashboard/accounts](https://stackone-60.mintlify.app/dashboard/accounts).
 
 ### 2. Generating API Key on StackOne:
-   * To securely connect your application with StackOne, you’ll need to generate API keys. These keys will authenticate your application and ensure secure data access.
-   * For detailed steps on generating API keys, refer to this [stackone-60.mintlify.app/dashboard/api-keys](https://stackone-60.mintlify.app/dashboard/api-keys).
+   * To securely connect your application with StackOne, you’ll need to generate and manage API Key. These keys will authenticate your application and ensure secure data access.
+   * For detailed steps on generating API key, refer to this [stackone-60.mintlify.app/dashboard/api-keys](https://stackone-60.mintlify.app/dashboard/api-keys).
 
 ### 3. Generating and Managing Session Tokens:
 
@@ -25,22 +25,14 @@ To address this, we are creating a unified job board that brings together job li
    1. **Prepare the API Key:**
         - Ensure your API key is securely stored. This key is essential for authenticating requests when generating session tokens.
    2. **Generate and Store the Session Token Securely:**
-        - Generate the session token, securely store it. This token is necessary for authenticating any future API calls.
-   3. **Using the Session Token:**
-        - Include the session token in the Authorization header of any subsequent API requests to StackOne.
-   4. **Managing Session Tokens:**
-        - Token Expiration: Session tokens usually have a set expiration time (e.g., 1 hour, as indicated by the expires_in value). After expiration, generate a new token using the same process.
-        - Revoking Tokens: If necessary, you can revoke session tokens through the StackOne platform’s API Management section, particularly in cases of security concerns.
+        - Generate the session token, securely store it. Refer to this [Create connect-session](https://docs.stackone.com/reference/stackone_create_connect_session).
+   3. **Using the Session Token:** 
+        - Include the session token when initializing the StackOne Hub to securely display the interface for connecting accounts. Refer to [Detailed guide on embedding StackOne.](https://docs.stackone.com/docs/embedding-the-stackone-hub)
 
-### 4. Fetching Integrations Data
-
-To retrieve available integrations data through StackOne, follow these steps:
-
-**Step-by-Step Instructions:**
-1. Use the following `curl` command to fetch the list of available integrations. Replace `YOUR_API_KEY` with your actual API key:
-   curl \-X GET ``https://api.stackone.com/integrations \-H Authorization: Bearer YOUR\_API\_KEY``
-2. The command will return a JSON response containing details about the available integrations. You can use this data to populate and display the integrations on your admin dashboard.  
-3. Update the Dashboard: Integrate the fetched data into your admin dashboard to allow users to view, manage, and interact with the list of integrations.
+### 4. Managing Integrations Data
+     
+  The Integrations section of the StackOne dashboard allows you to manage integration (aka provider) for a StackOne Project. Manage, enable, and configure integrations for your StackOne 
+  project using the [Integrations page](https://docs.stackone.com/docs/project-integrations).
 
 ## API Interaction Overview
 
