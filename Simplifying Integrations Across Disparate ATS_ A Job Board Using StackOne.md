@@ -5,13 +5,16 @@ We need to manage job postings from different platforms like Greenhouse, Ashby, 
 To address this, we are creating a unified job board that brings together job listings from all these platforms. This will enable the board to present all job postings in a single, consistent format, ensuring users have access to up-to-date listings from every ATS provider.
 
 
+![diagram1 drawio](https://github.com/user-attachments/assets/ba62ecc0-03a7-482d-aa06-97bdf5f30cbc)
+
+
 ## Integrating ATS Platforms with StackOne
 
 ### 1. Setting Up StackOne Connection:
    * To get started with StackOne, log in to the platform and navigate to the Integrations page from the dashboard. From there, you can easily link and manage connections with various ATS platforms.
    * For more detailed guidance on setting up these connections, refer to this [stackone-60.mintlify.app/dashboard/accounts](https://stackone-60.mintlify.app/dashboard/accounts).
 
-### 2. Generating API Keys on StackOne:
+### 2. Generating API Key on StackOne:
    * To securely connect your application with StackOne, you’ll need to generate API keys. These keys will authenticate your application and ensure secure data access.
    * For detailed steps on generating API keys, refer to this [stackone-60.mintlify.app/dashboard/api-keys](https://stackone-60.mintlify.app/dashboard/api-keys).
 
