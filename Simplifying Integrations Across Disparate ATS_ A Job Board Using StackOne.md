@@ -40,7 +40,7 @@ To address this, we are creating a unified job board that brings together job li
 
 - ### Exploring API Endpoints
 
-  * StackOne enables seamless integration with multiple ATS platforms, allowing you to capture and manage accounts, job postings, and applications through a consistent API interface.
+  StackOne enables seamless integration with multiple ATS platforms, allowing you to capture and manage accounts, job postings, and applications through a consistent API interface.
 
 **1\. Fetching Accounts Data**
 
