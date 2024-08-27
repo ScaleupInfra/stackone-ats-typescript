@@ -1,6 +1,6 @@
 import React from "react";
 import Contact from "./Contact";
-import ListCandidateJobsButton from "./ListCandidateJobs"; // Adjusted to the correct import
+import ListCandidateJobsButton from "./ListCandidateJobs"; 
 import mail from "../resources/Icons/mail.svg";
 import notification from "../resources/Icons/notification.svg";
 import user from "../resources/Icons/user.svg";

@@ -10,16 +10,16 @@ import Contact from "./Contact";
 import { listAccounts } from "../http/listAccounts";
 
 interface Account {
-  id: string;
   provider: string;
+  origin_owner_id: string;
 }
 
 const ManageATSContent: React.FC = () => {
   const [showLinkAccount, setShowLinkAccount] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
   const [accounts, setAccounts] = useState<Account[]>([]);
-  const [selectedAccountId, setSelectedAccountId] = useState<string | null>(null);
   const [selectedProvider, setSelectedProvider] = useState<string>("No account available");
+  const [selectedAccountId, setSelectedAccountId] = useState<string | null>(null);
 
   const toggleDropdown = () => {
     setShowDropdown(!showDropdown);
@@ -33,13 +33,18 @@ const ManageATSContent: React.FC = () => {
     try {
       const accountsData = await listAccounts();
       if (Array.isArray(accountsData)) {
-        setAccounts(accountsData);
-        if (accountsData.length > 0) {
-          setSelectedAccountId(accountsData[0].id);
-          setSelectedProvider(accountsData[0].provider);
+        const mappedAccounts = accountsData.map((account: { provider: string; origin_owner_id: string }) => ({
+          provider: account.provider,
+          origin_owner_id: account.origin_owner_id,
+        }));
+        setAccounts(mappedAccounts);
+        
+        if (mappedAccounts.length > 0) {
+          setSelectedProvider(mappedAccounts[0].provider);
+          setSelectedAccountId(mappedAccounts[0].origin_owner_id);
         } else {
-          setSelectedAccountId(null);
           setSelectedProvider("No accounts available");
+          setSelectedAccountId(null);
         }
       }
     } catch (error) {
@@ -47,9 +52,9 @@ const ManageATSContent: React.FC = () => {
     }
   };
 
-  const accountClick = (id: string, provider: string) => {
-    setSelectedAccountId(id);
+  const accountClick = (provider: string, originOwnerId: string) => {
     setSelectedProvider(provider);
+    setSelectedAccountId(originOwnerId); 
     setShowDropdown(false);
   };
 
@@ -99,9 +104,9 @@ const ManageATSContent: React.FC = () => {
                 {accounts.length > 0 ? (
                   accounts.map((account) => (
                     <li
-                      key={account.id}
+                      key={account.origin_owner_id} // Use origin_owner_id as key
                       className="px-4 py-2 hover:bg-[#E3FFF2] cursor-pointer text-[#05C168]"
-                      onClick={() => accountClick(account.id, account.provider)}
+                      onClick={() => accountClick(account.provider, account.origin_owner_id)}
                     >
                       {account.provider}
                     </li>
@@ -119,17 +124,17 @@ const ManageATSContent: React.FC = () => {
         {showLinkAccount && (
           <LinkAccountButton setShowLinkAccount={setShowLinkAccount} />
         )}
-        {selectedAccountId && (
-          <ListJobsPostingsButton
-            provider={selectedProvider}
-            originOwnerId={selectedAccountId}
-          />
-        )}
-        {selectedAccountId && (
-          <ListApplicationsButton
-            provider={selectedProvider}
-            originOwnerId={selectedAccountId}
-          />
+        {selectedProvider && selectedAccountId && (
+          <>
+            <ListJobsPostingsButton
+              provider={selectedProvider}
+              originOwnerId={selectedAccountId}
+            />
+            <ListApplicationsButton
+              provider={selectedProvider}
+              originOwnerId={selectedAccountId}
+            />
+          </>
         )}
         <Contact />
       </div>

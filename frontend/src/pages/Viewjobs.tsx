@@ -9,6 +9,7 @@ interface JobLocation {
   name: string;
 }
 
+
 interface JobStatus {
   value: string;
 }
@@ -25,12 +26,7 @@ interface JobDetails {
   created_at: string;
 }
 
-interface ViewJobProps {
-  provider: string;
-  originOwnerId: string;
-}
-
-const ViewJob: React.FC<ViewJobProps> = ({ provider, originOwnerId }) => {
+const ViewJob: React.FC = () => {
   const { jobId } = useParams<{ jobId: string }>();
   const location = useLocation();
   const navigate = useNavigate();
@@ -53,9 +49,10 @@ const ViewJob: React.FC<ViewJobProps> = ({ provider, originOwnerId }) => {
     type: "success" | "error";
   } | null>(null);
 
-  const { jobDetails, accountId } = location.state as {
+  const { jobDetails, provider, originOwnerId } = location.state as {
     jobDetails: JobDetails;
-    accountId: string;
+    provider: string;
+    originOwnerId: string;
   };
 
   const backClick = () => {
@@ -86,8 +83,8 @@ const ViewJob: React.FC<ViewJobProps> = ({ provider, originOwnerId }) => {
     e.preventDefault();
 
     try {
-      if (!accountId) {
-        throw new Error("Account ID is missing");
+      if (!originOwnerId) {
+        throw new Error("Origin Owner ID is missing");
       }
 
       const applicationData = {
@@ -100,8 +97,6 @@ const ViewJob: React.FC<ViewJobProps> = ({ provider, originOwnerId }) => {
           title: formData.title,
         },
         job_id: formData.jobId,
-        provider,
-        originOwnerId,
       };
 
       await createApplication(provider,originOwnerId, applicationData);
@@ -122,50 +117,50 @@ const ViewJob: React.FC<ViewJobProps> = ({ provider, originOwnerId }) => {
   };
 
   return (
-    <div className="p-6">
-      <button
-        onClick={backClick}
-        className="btn-back"
-      >
-        Back
-      </button>
-      <h1 className="job-title2">
-        Job Details for {jobDetails?.title || jobId}
-      </h1>
-      <div className="job-info">
-        <p>
-          <strong>Title:</strong> {jobDetails?.title || "N/A"}
-        </p>
-        <p>
-          <strong>Job ID:</strong> {jobDetails?.id || jobId}
-        </p>
-        <p>
-          <strong>Location:</strong>{" "}
-          {jobDetails?.locations
-            .map((location: JobLocation) => location.name)
-            .join(", ") || "N/A"}
-        </p>
-        <div className="job-description">
-          <strong>Description:</strong>
-          <div className="content-intro">
-            {jobDetails?.content.html ? parse(jobDetails.content.html) : "N/A"}
-          </div>
+  <div className="p-6">
+    <button
+      onClick={backClick}
+      className="btn-back"
+    >
+      Back
+    </button>
+    <h1 className="job-title2">
+      Job Details for {jobDetails?.title || jobId}
+    </h1>
+    <div className="job-info">
+      <p>
+        <strong>Title:</strong> {jobDetails?.title || "N/A"}
+      </p>
+      <p>
+        <strong>Job ID:</strong> {jobDetails?.id || jobId}
+      </p>
+      <p>
+        <strong>Location:</strong>{" "}
+        {jobDetails?.locations
+          .map((location: JobLocation) => location.name)
+          .join(", ") || "N/A"}
+      </p>
+      <div className="job-description">
+        <strong>Description:</strong>
+        <div className="content-intro">
+          {jobDetails?.content.html ? parse(jobDetails.content.html) : "N/A"}
         </div>
-        <div className="mt-10px">
-          <p>
-            <strong>Updated At:</strong> {jobDetails?.updated_at || "N/A"}
-          </p>
-          <p>
-            <strong>Created At:</strong> {jobDetails?.created_at || "N/A"}
-          </p>
-        </div>
-        <button
-          onClick={applyClick}
-          className="bg-[#05C168] text-white border-2 border-[#05C168] px-4 py-2 rounded-md mt-4"
-        >
-          Apply
-        </button>
       </div>
+      <div className="mt-10px">
+        <p>
+          <strong>Updated At:</strong> {jobDetails?.updated_at || "N/A"}
+        </p>
+        <p>
+          <strong>Created At:</strong> {jobDetails?.created_at || "N/A"}
+        </p>
+      </div>
+      <button
+        onClick={applyClick}
+        className="bg-[#05C168] text-white border-2 border-[#05C168] px-4 py-2 rounded-md mt-4"
+      >
+        Apply
+      </button>
+    </div>
 
       {showForm && (
         <div className="form-overlay">
@@ -314,9 +309,19 @@ const ViewJob: React.FC<ViewJobProps> = ({ provider, originOwnerId }) => {
       )}
 
       {message && (
-        <div className={`message ${message.type}`}>
-          <img src={correctIcon} alt="Success" />
-          <p>{message.text}</p>
+        <div
+          className={message.type === "error" ? "error-card" : "success-card"}
+        >
+          <button
+            onClick={() => setMessage(null)}
+            className="card-close-button2"
+          >
+            &times;
+          </button>
+          {message.type === "success" && (
+            <img src={correctIcon} alt="Success" className="success-icon" />
+          )}
+          {message.text}
         </div>
       )}
     </div>
