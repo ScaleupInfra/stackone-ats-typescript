@@ -1,50 +1,69 @@
 import React, { useState, useEffect } from "react";
 import { listJobsPostings } from "../http/listJobsPostings";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
+import location from "../resources/Icons/location.svg";
+import { useNavigate } from "react-router-dom";
 import "../resources/Content.css";
-import aeroDown from "../resources/Icons/arrowdown.svg";
 
-interface JobStatus {
+interface Location {
+  id: string;
+  name: string;
+  remote_id: string;
+}
+
+interface Status {
   value: string;
   source_value: string;
 }
 
-interface HiringTeamMember {
-  user_id: string;
-  first_name: string;
-  last_name: string;
-  role: string;
-  remote_user_id: string;
+interface Content {
+  html: string;
 }
 
-interface Job {
+export interface JobPosting {
   id: string;
   title: string;
-  job_status: JobStatus;
-  department_ids: string[];
-  location_ids: string[];
-  hiring_team: HiringTeamMember[];
-  confidential: string;
-  created_at: string;
+  locations: Location[];
+  internal: string;
+  status: Status;
+  job_id: string;
+  content: Content;
+  external_url: string;
   updated_at: string;
+  created_at: string;
   remote_id: string;
+  remote_job_id: string;
+  accountId: string;
 }
 
-const ListJobsPostingsButton: React.FC<{ accountId: string }> = ({
-  accountId,
-}) => {
-  const [jobs, setJobs] = useState<Job[]>([]);
-  const [visibleJobs, setVisibleJobs] = useState<number>(2);
+interface ListJobsPostingsButtonProps {
+  provider: string;
+  originOwnerId: string;
+}
+
+const ListJobsPostingsButton: React.FC<ListJobsPostingsButtonProps> = ({ provider, originOwnerId }) => {
+  const [jobs, setJobs] = useState<JobPosting[]>([]);
+  const [visibleJobs, setVisibleJobs] = useState<number>(4);
+  const navigate = useNavigate();
 
   const fetchJobs = async () => {
     try {
-      const jobsData = await listJobsPostings(accountId);
-      if (Array.isArray(jobsData.data)) {
-        setJobs(jobsData.data);
-      }
-    } catch (error) {
-      console.error("Error fetching jobs:", error);
+      const jobsData = await listJobsPostings(provider, originOwnerId);
+      setJobs(jobsData);
+    } catch (err) {
+      console.error("Error fetching jobs:", err);
     }
+  };
+
+  useEffect(() => {
+    fetchJobs();
+  }, [provider, originOwnerId]);
+
+  const truncateText = (text: string | undefined, maxLength: number = 50) => {
+    if (!text) return "";
+    return text.length > maxLength
+      ? `${text.slice(0, maxLength - 3)}...`
+      : text;
   };
 
   const showMore = () => {
@@ -52,18 +71,28 @@ const ListJobsPostingsButton: React.FC<{ accountId: string }> = ({
   };
 
   const showLess = () => {
-    setVisibleJobs((prev) => Math.max(prev - 2, 2));
+    setVisibleJobs(4);
   };
 
-  useEffect(() => {
-    fetchJobs();
-  }, [accountId]);
+  const viewJobClick = (job: JobPosting) => {
+    navigate(`/view-job/${job.job_id}`, {
+      state: {
+        jobDetails: job,
+        accountId: job.accountId,
+      },
+    });
+  };
 
   return (
     <div className="relative z-1">
+      <h2 className="text-2xl font-bold mt-8 mb-4" style={{ fontFamily: "Inter, sans-serif" }}>
+        All Job Postings
+      </h2>
       {jobs.length === 0 ? (
         <div className="flex items-center justify-center min-h-[200px] bg-[#E3FFF2] border-2 border-[#05C168] rounded-lg p-4 text-[#A8D5BA]">
-          <h2 className="text-xl font-bold">Jobs data is not available</h2>
+          <h2 className="text-xl font-bold">
+            Job postings data is not available
+          </h2>
         </div>
       ) : (
         <TransitionGroup className="sliding-content">
@@ -71,51 +100,47 @@ const ListJobsPostingsButton: React.FC<{ accountId: string }> = ({
             <CSSTransition key={job.id} timeout={300} classNames="slide">
               <div id={`job-card-${index}`} className="job-card">
                 <h2 className="job-title">{job.title}</h2>
-                <p>
-                  <strong>Job ID:</strong>{" "}
-                  <span
-                    id={`truncated-text-${index}`}
-                    className="truncated-text"
-                  >
-                    {job.remote_id}
-                  </span>
-                </p>
-                <p>
-                  <strong>Status:</strong> {job.job_status.value}
-                </p>
-                <div
-                  id={`job-badge-container-${index}`}
-                  className="job-badge-container"
-                >
-                  <p>Created at</p>
-                  <span className="job-badge">
-                    {new Date(job.created_at).toLocaleString()}
-                  </span>
-                  <p>Updated at</p>
-                  <span className="job-badge">
-                    {new Date(job.updated_at).toLocaleString()}
-                  </span>
+                <div className="text-[#05C168] text-sm font-medium space-y-1">
+                  <div className="flex flex-col">
+                    <strong>Job ID:</strong>
+                    <span id={`truncated-text-${index}`} className="truncated-text">
+                      {truncateText(job.remote_job_id)}
+                    </span>
+                  </div>
+                  <div className="flex flex-col">
+                    <div className="flex items-center space-x-2">
+                      <img src={location} alt="Location Icon" className="w-5 h-5 text-[#05C168] flex-shrink-0" />
+                      <strong className="flex-shrink-0">Location:</strong>
+                      <span className="font-normal">
+                        {truncateText(job.locations.map((location) => location.name).join(", "))}
+                      </span>
+                    </div>
+                  </div>
                 </div>
+                <button
+                  className="bg-[#E3FFF2] text-[#05C168] border-2 border-[#05C168] px-4 py-2 rounded-md mt-4"
+                  onClick={() => viewJobClick(job)}
+                >
+                  View Job
+                </button>
               </div>
             </CSSTransition>
           ))}
         </TransitionGroup>
       )}
       <div className="flex justify-between mt-4">
-        {jobs.length > 0 && visibleJobs < jobs.length && (
-          <button className="show-more-button" onClick={showMore}>
-            <img src={aeroDown} alt="Show more" className="icon-size" />
-          </button>
-        )}
-        {jobs.length > 0 && visibleJobs > 2 && (
-          <button className="show-more-button" onClick={showLess}>
-            <img
-              src={aeroDown}
-              alt="Show less"
-              className="icon-size rotate-180"
-            />
-          </button>
-        )}
+        <div className="see-more-container">
+          {jobs.length > 0 && visibleJobs < jobs.length && (
+            <button className="show-more-button" onClick={showMore}>
+              + See More
+            </button>
+          )}
+          {jobs.length > 0 && visibleJobs > 4 && (
+            <button className="show-more-button" onClick={showLess}>
+              See Less
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );

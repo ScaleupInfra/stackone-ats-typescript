@@ -13,7 +13,6 @@ export const retrieveConnectSessionToken = async () => {
       throw new Error(`HTTP error! status: ${connectSessionResponse.status}`);
     }
 
-
     const response = await connectSessionResponse.json();
 
     return { token: response.token };

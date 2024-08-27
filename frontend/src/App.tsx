@@ -8,7 +8,7 @@ const App: React.FC = () => {
     <Router>
       <Routes>
         <Route path="/*" element={<MainPage />} />
-        <Route path="/view-job/:jobId" element={<ViewJob />} /> 
+        <Route path="/view-job/:jobId" element={<ViewJob provider="your-provider" originOwnerId="your-origin-owner-id" />} />
       </Routes>
     </Router>
   );
