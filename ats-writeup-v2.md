@@ -20,33 +20,22 @@ With StackOne, you can move beyond the grind of manual integrations and focus on
 
 ## Integrating ATS Platforms with StackOne
 
-### 1. Setting Up StackOne Connection:
-   * To get started with StackOne, log in to the platform and navigate to the Integrations page from the dashboard. From there, you can easily link and manage connections with various ATS platforms.
-   * For more detailed guidance on setting up these connections, refer to this documentation [here](https://stackone-60.mintlify.app/dashboard/accounts).
+We've already seen how integrating multiple ATS platforms can be a real challenge. Fortunately, StackOne’s unified API is here to make that process a whole lot easier. Let’s walk through how you can get started and integrate these platforms seamlessly into your application.
 
-### 2. Generating API Key on StackOne:
-   * To securely connect your application with StackOne, you’ll need to generate and manage API Key. These keys will authenticate your application and ensure secure data access.
-   * For detailed steps on generating API key, refer to this documentation [here](https://stackone-60.mintlify.app/dashboard/api-keys).
+### Getting Started with StackOne
 
-### 3. Generating and Managing Session Tokens:
+First things first—set up your project in StackOne. You’ll need to generate an API key, which is crucial for securing your connections and making sure everything runs smoothly between your app and the ATS platforms. If you need a hand with this, the [Getting Started with StackOne](https://docs.stackone.com/docs/getting-started) guide has got you covered with all the steps.
 
-  To securely connect your application with StackOne, you'll need to generate and manage session tokens. These tokens authenticate your application and ensure that only authorized interactions occur.
+### Connecting Your Front-End and Back-End
 
-   1. **Prepare the API Key:**
-        - Ensure your API key is securely stored. This key is essential for authenticating requests when generating session tokens.
-   2. **Generate and Store the Session Token Securely:**
-        - Generate the session token, securely store it. Refer to this [Create connect-session](https://docs.stackone.com/reference/stackone_create_connect_session).
-   3. **Using the Session Token:** 
-        - Include the session token when initializing the StackOne Hub to securely display the interface for connecting accounts. Refer to [Detailed guide on embedding StackOne.](https://docs.stackone.com/docs/embedding-the-stackone-hub)
+Once your project is set up, it’s time to bring StackOne into your app. Start by embedding the StackOne React Hub into your front-end so users can easily manage their connections. On the back-end, you’ll handle session tokens to keep everything secure and running smoothly. For a step-by-step on this, check out the guides on [embedding the StackOne Hub](https://docs.stackone.com/docs/embedding-the-stackone-hub) and [connecting your back-end](https://docs.stackone.com/docs/connect-your-backend-with-stackone-api).
 
-### 4. Managing Integrations Data
-     
-  The Integrations section of the StackOne dashboard allows you to manage integration (aka provider) for a StackOne Project. Manage, enable, and configure integrations for your StackOne 
-  project using the [Integrations page](https://docs.stackone.com/docs/project-integrations).
+By following these steps, you’ll be able to integrate multiple ATS platforms into your app with ease, all thanks to StackOne’s simplified approach.
+
 
 ## API Interaction Overview
 
-  ![Untitled Diagram drawio (5)](https://github.com/user-attachments/assets/fea7ee9b-82bf-470a-9f7e-735f97bc9917)
+![api-call-flow](https://github.com/user-attachments/assets/6a06145f-77a9-424c-b8b2-67ba05eec423)
 
  ### Exploring API Endpoints
 
