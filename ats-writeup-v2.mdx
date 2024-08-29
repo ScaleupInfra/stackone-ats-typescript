@@ -30,41 +30,14 @@ This structured API flow ensures that your job board remains responsive, accurat
 
 ![](/api-call-flow-v3.png)
 
- ### Exploring API Endpoints
+### Steps to Building a Job Board Using StackOne
 
-Let’s dive deeper into some of the key ATS endpoints that StackOne provides to make integrating with multiple platforms straightforward and consistent.
+When building a job board that integrates with multiple ATS platforms there are several key steps involved. Each step corresponds to a specific operation within StackOne, which handles the necessary API interactions to fetch, display, and manage job listings and applications. Below are the steps needed to create a functional job board using StackOne.
 
-These endpoints form the backbone of how your job board interacts with various ATS systems, ensuring that data flows seamlessly from account management to job applications.
-
-**1. Fetching Accounts Data**
-
-* **Operation: [ GET /accounts ](https://docs.stackone.com/reference/stackone_list_linked_accounts)**  
-* **Purpose**: This endpoint retrieves the account information, including the `accountId`. The `accountId` is crucial for identifying which ATS platform's data will be accessed for further operations, such as fetching jobs and applications.  
-
-**2. Fetching Job Data**
-
-* **Operation: [ GET /ats/jobs ](https://docs.stackone.com/reference/ats_list_jobs)**  
-* **Purpose**: This endpoint fetches job data associated with the provided `accountId`. It allows the job board to retrieve job listings from StackOne aggregated from various ATS platforms.  
-
-**3. Fetching Job Applications**
-
-* **Operation: [ GET /ats/applications ](https://docs.stackone.com/reference/ats_list_applications)**  
-* **Purpose**: This endpoint retrieves application data related to the `accountId`. It provides a list of job applications, ensuring consistency and uniformity in the data from multiple ATS platforms.  
-
-**4.  Displaying Job Postings to Candidates**
-
-* **Operation: [ GET /ats/job_postings ](https://docs.stackone.com/reference/ats_list_job_postings)**  
-* **Purpose**: This endpoint fetches all available job postings, providing a complete list of opportunities for candidates to view and apply for through your job board.
-
-**5. Applying for Jobs**
-
-* **Operation: [ POST /ats/applications ](https://docs.stackone.com/reference/ats_create_application)**  
-* **Purpose**: This endpoint allows candidates to submit job applications. The job board sends the application details to StackOne, which then forwards them to the appropriate ATS platform for processing.
-
-By utilizing these endpoints, your job board can seamlessly interact with multiple ATS platforms, offering a consistent and efficient experience for both users and administrators.
+**1. Fetching All Accounts to Display Jobs and Applications**
 
 ## Conclusion
 
-In this tutorial, we walked through the process of creating a job board that integrates with multiple ATS platforms like Greenhouse and Ashby. By using StackOne’s unified API, we were able to minimize the effort required to connect to these different systems. StackOne streamlined the integration process, allowing us to manage jobs and applications across various platforms without the need for custom coding or extensive maintenance.
+In this walkthrough, we explored the process of creating a job board that integrates with multiple ATS platforms like Greenhouse and Ashby. By using StackOne’s unified API, we minimized the effort required to connect these systems. StackOne streamlined the integration process, enabling us to manage jobs and applications across various platforms without the need for custom coding or extensive maintenance.
 
 StackOne made building and maintaining the job board straightforward, allowing us to focus on delivering a seamless user experience while keeping everything responsive and up-to-date with ease.
