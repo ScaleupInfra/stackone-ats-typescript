@@ -35,35 +35,41 @@ By following these steps, you’ll be able to integrate multiple ATS platforms i
 
 ## API Interaction Overview
 
+To effectively integrate multiple ATS platforms using StackOne, it's important to understand the sequence of API calls and how data flows through the system. 
+
+The following diagram illustrates the interaction flow between the user, your job board, StackOne, and the ATS providers.
+
 ![api-call-flow](https://github.com/user-attachments/assets/6a06145f-77a9-424c-b8b2-67ba05eec423)
 
  ### Exploring API Endpoints
 
-  StackOne enables seamless integration with multiple ATS platforms, allowing you to capture and manage accounts, job postings, and applications through a consistent API interface.
+Let’s dive deeper into the specific endpoints StackOne provides to make integrating with multiple ATS platforms straightforward and consistent. 
+
+These endpoints are the backbone of how your job board interacts with various ATS systems, ensuring that data flows seamlessly from account management to job applications.
 
 **1\. Fetching Accounts Data**
 
-* **Operation: [ Get Accounts ](https://docs.stackone.com/reference/stackone_list_linked_accounts)**  
+* **Operation: [ GET /accounts ](https://docs.stackone.com/reference/stackone_list_linked_accounts)**  
 * **Purpose**: This endpoint retrieves account data, including the `accountId`, which is necessary for fetching specific job and application data from StackOne. The `accountId` identifies which ATS platforms' data should be accessed.  
 
 **2\. Fetching Job Data**
 
-* **Operation: [ Get Jobs Data ](https://docs.stackone.com/reference/ats_list_jobs)**  
+* **Operation: [ GET /ats/jobs ](https://docs.stackone.com/reference/ats_list_jobs)**  
 * **Purpose**: This endpoint fetches job data associated with the provided `accountId`. It allows the job board to retrieve job listings from StackOne that are aggregated from various ATS platforms.  
 
 **3\. Fetching Job Applications**
 
-* **Operation: [ Get Applications data ](https://docs.stackone.com/reference/ats_list_applications)**  
+* **Operation: [ GET /ats/applications ](https://docs.stackone.com/reference/ats_list_applications)**  
 * **Purpose**: This endpoint retrieves application data related to the `accountId`. It provides a list of job applications, ensuring consistency and uniformity in the data from multiple ATS platforms.  
 
 **4\.  Displaying Job Postings to Candidates**
 
-* **Operation: [ Get Job postings data ](https://docs.stackone.com/reference/ats_list_job_postings)**  
+* **Operation: [ GET /ats/job_postings ](https://docs.stackone.com/reference/ats_list_job_postings)**  
 * **Purpose**: This endpoint fetches all available job postings. It provides a comprehensive list of job opportunities for users to view and apply for on the job board.  
 
 **5\. Applying for Jobs**
 
-* **Operation: [ Create Application](https://docs.stackone.com/reference/ats_create_application)**  
+* **Operation: [ POST /ats/applications ](https://docs.stackone.com/reference/ats_create_application)**  
 * **Purpose**: This endpoint is used to submit a new job application. The job board sends the application details to StackOne, which forwards them to the appropriate ATS platform for processing.  
 
 ## Conclusion and Recommendations
