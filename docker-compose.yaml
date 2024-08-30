@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"  # Frontend port
+      - "3001:3001"  # Backend port
+    volumes:
+      - .:/app
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    command: npm start
