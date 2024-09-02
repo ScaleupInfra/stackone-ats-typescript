@@ -11,9 +11,10 @@ export const getAllAccounts = async () => {
                 'authorization': `Basic ${config.STACKONE_API_KEY}`,
             },
         });
-
+ 
         return response.data;
     } catch (error) {
         AxiosError(error);
     }
 }
+

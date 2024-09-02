@@ -14,12 +14,13 @@
   background-color: #E3FFF2;
   color: #05C168;
   border: 2px solid #05C168;
-  border-radius: 0.5rem;
+  border-radius: 24px;
   padding: 1rem;
   width: calc(50% - 0.5rem);
   flex-shrink: 0;
   position: relative;
   box-sizing: border-box;
+  
 }
 
 @media (max-width: 1024px) {
@@ -47,15 +48,15 @@
 }
 
 .job-badge {
-  background-color: rgba(255, 255, 255, 0.7);
   padding: 0.25rem 0.5rem;
   border-radius: 0.25rem;
-  font-size: 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
 }
 
 .job-title {
-  font-size: 1.5rem;
-  font-weight: bold;
+  font-size: 30px;
+  font-weight: 600;
   margin-bottom: 1rem;
   word-wrap: break-word;
 }
@@ -224,7 +225,7 @@
 
 .job-title2 {
   font-size: 1rem;
-  font-weight: bold;
+  font-weight: semibold;
   margin-bottom: 20px;
   color:#05C168;
 }

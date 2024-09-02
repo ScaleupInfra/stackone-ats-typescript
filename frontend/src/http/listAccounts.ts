@@ -1,4 +1,4 @@
-import { getApiUrl, responseHandler,errorHandler } from './errorHandler'; 
+import { getApiUrl, responseHandler, errorHandler } from './errorHandler'; 
 
 export const listAccounts = async () => {
     try {
@@ -7,8 +7,11 @@ export const listAccounts = async () => {
             method: 'GET',
         });
 
-        return await responseHandler(response);
+        const accountsData = await responseHandler(response);
+       return accountsData;
     } catch (error) {
+        
         errorHandler(error); 
+        return [];
     }
 };

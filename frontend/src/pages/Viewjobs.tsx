@@ -49,9 +49,10 @@ const ViewJob: React.FC = () => {
     type: "success" | "error";
   } | null>(null);
 
-  const { jobDetails, accountId } = location.state as {
+  const { jobDetails, provider, originOwnerId } = location.state as {
     jobDetails: JobDetails;
-    accountId: string;
+    provider: string;
+    originOwnerId: string;
   };
 
   const backClick = () => {
@@ -82,8 +83,8 @@ const ViewJob: React.FC = () => {
     e.preventDefault();
 
     try {
-      if (!accountId) {
-        throw new Error("Account ID is missing");
+      if (!originOwnerId) {
+        throw new Error("Origin Owner ID is missing");
       }
 
       const applicationData = {
@@ -98,7 +99,7 @@ const ViewJob: React.FC = () => {
         job_id: formData.jobId,
       };
 
-      await createApplication(accountId, applicationData);
+      await createApplication(provider,originOwnerId, applicationData);
       setMessage({
         text: "Application submitted successfully",
         type: "success",

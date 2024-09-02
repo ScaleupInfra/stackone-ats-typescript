@@ -1,0 +1,68 @@
+{
+    "name": "Stackone",
+    "logo": {
+      "light": "/logo/light.png",
+      "dark": "/logo/dark.png"
+    },
+    "favicon": "/favicon.png",
+    "colors": {
+      "primary": "#11845B",
+      "light": "#46BE94",
+      "dark": "#11845B",
+      "background": {
+        "dark": "#0b101b"
+      }
+    },
+    "modeToggle": {
+      "default": "light"
+    },
+    "topbarLinks": [
+       {
+        "name": "Login",
+        "url": "https://app.stackone.com"
+      }
+    ],
+    "topbarCtaButton": {
+      "name": "Talk to an Expert",
+      "url": "https://www.stackone.com/demo"
+    },
+    "topAnchor": {
+      "name": "Documentation",
+      "icon": "book-open"
+    },
+    "anchors": [
+      {
+        "name": "HRIS",
+        "icon": "users",
+        "url": "hris"
+      },
+      {
+        "name": "ATS",
+        "icon": "briefcase",
+        "url": "ats"
+      },
+      {
+        "name": "CRM",
+        "icon": "address-book",
+        "url": "crm"
+      },
+      {
+        "name": "Marketing",
+        "icon": "bullhorn",
+        "url": "marketing"
+      }
+    ],
+    "navigation": [
+      {
+        "group": "Overview",
+        "pages": [
+          "ats-writeup-v2",
+          "dashboard-api-keys-writeup"
+        ]
+        }
+    ],
+    "footerSocials": {
+      "twitter": "https://twitter.com/StackOneHQ",
+      "linkedin": "https://www.linkedin.com/company/stackonehq/"
+    }
+  }

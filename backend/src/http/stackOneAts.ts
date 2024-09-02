@@ -78,6 +78,7 @@ export const postApplication = async (accountId: string, applicationData: unknow
                 'content-type': 'application/json',
             }
         });
+        console.log(response.data);
         return response.data;
     } catch (error) {
         AxiosError(error);
