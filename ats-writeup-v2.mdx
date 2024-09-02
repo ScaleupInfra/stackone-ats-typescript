@@ -20,13 +20,11 @@ Managing these integrations can quickly become a burden, consuming valuable time
 
 With StackOne, you can move beyond the grind of manual integrations and focus on building the features that truly matter.
 
-## API Interaction Overview
+## Integrating ATS Platforms: Key Steps and System Interactions for Your Job Board
 
-When building your job board, you’ll need to efficiently display jobs and manage applications from various ATS providers like Greenhouse, Ashby, and others. To streamline this process, we will be using StackOne’s ATS endpoints to integrate and synchronize data across multiple platforms.
+When building your job board, you’ll need to display jobs and manage applications from various ATS providers like Greenhouse, Ashby, and others. To streamline this process, we will be using StackOne’s ATS endpoints to integrate and synchronize data across multiple platforms.
 
-Understanding the sequence of API calls and data flow is crucial to making this integration work seamlessly. The diagram below illustrates how these interactions occur—from the moment a user engages with your job board to the retrieval of job listings and application data from the ATS providers. 
-
-This structured API flow ensures that your job board remains responsive, accurate, and able to handle data from diverse sources with minimal complexity.
+Understanding the sequence of API calls is crucial to making this integration work seamlessly. The diagram below illustrates how these interactions occur—from the moment a user engages with your job board to the retrieval of job listings and application data from the ATS providers. 
 
 ![](/api-call-flow-v3.png)
 
@@ -36,46 +34,34 @@ When building a job board that integrates with multiple ATS platforms there are 
 
 **1. Fetching All ATS Accounts to Display Jobs and Applications**
 
-- Operation Required: [GET /accounts](https://docs.stackone.com/reference/stackone_list_linked_accounts)
+The first step in setting up your job board is to fetch all available ATS accounts. This operation retrieves the account information, including the accountId, which is crucial for identifying which ATS platform's data will be accessed for further operations. This allows HR professionals to select any ATS account from which they want to view jobs and applications. By displaying all connected ATS accounts, the job board provides a centralized interface for managing multiple platforms. 
 
-- The first step in setting up your job board is to fetch all available ATS accounts. This operation retrieves the account information, including the accountId, which is crucial for identifying which ATS platform's data will be accessed for further operations.
-
-- This allows HR professionals to select any ATS account from which they want to view jobs and applications. By displaying all connected ATS accounts, the job board provides a centralized interface for managing multiple platforms.
+- API Call: [GET /accounts](https://docs.stackone.com/reference/stackone_list_linked_accounts)
 
 **2. Displaying Job Listings from Multiple ATS Providers**
 
-- Operation Required: [GET /ats/jobs](https://docs.stackone.com/reference/ats_list_jobs)
+After an ATS account is selected, the next step is to fetch the job listings associated with that account. This API call translates the interface and retrieves job data from the selected ATS platform, which is then displayed on the job board. This step enables HR professionals to view job listings from any selected ATS account, making it easier to manage job openings across different platforms through a single interface.
 
-- Once an ATS account is selected, the next step is to fetch the job listings associated with that account. This operation pulls in job data from the selected ATS platform, aggregating it so that it can be displayed on the job board.
-
-- This step allows HR professionals to view job listings for any selected ATS account, making it easier to manage job openings across different platforms from a single interface.
+- API Call: [GET /ats/jobs](https://docs.stackone.com/reference/ats_list_jobs)
 
 **3. Displaying Applications from Multiple ATS Providers**
 
-- Operation Required: [GET /ats/applications](https://docs.stackone.com/reference/ats_list_applications)
+After fetching job listings, you’ll also need to display the candidate applications associated with those jobs. This operation retrieves application data related to the selected accountId, ensuring that all candidate applications are accessible in one place. HR professionals can view candidate applications for any selected ATS account, streamlining the process of managing and reviewing applications across multiple platforms.
 
-- After fetching job listings, you’ll also need to display the candidate applications associated with those jobs. This operation retrieves application data related to the selected accountId, ensuring that all candidate applications are accessible in one place.
-
-- HR professionals can view candidate applications for any selected ATS account, streamlining the process of managing and reviewing applications across multiple platforms.
+- API Call: [GET /ats/applications](https://docs.stackone.com/reference/ats_list_applications)
 
 **4. Displaying Job Postings to Candidates**
 
-- Operation Required: [GET /ats/job_postings](https://docs.stackone.com/reference/ats_list_job_postings)
+To keep your job board’s listings up-to-date and accessible to candidates, this API call retrieves job postings from the selected ATS accounts. The endpoint translates the interface and fetches the data, allowing you to present a comprehensive list of job opportunities on your job board. 
 
-- To keep your job board’s listings up-to-date and accessible to candidates, this operation fetches all available job postings from the selected ATS accounts. It compiles a comprehensive list of job opportunities that candidates can view and apply for.
-
-- This ensures that candidates have access to the most current job postings on your job board, making it easier for them to find and apply for positions that match their skills and interests.
+- API Call: [GET /ats/job_postings](https://docs.stackone.com/reference/ats_list_job_postings)
 
 **5. Submitting Job Applications**
 
-- Operation Required: [POST /ats/applications](https://docs.stackone.com/reference/ats_create_application)
+In this step of the job board process, we are enabling candidates to submit their job applications. This operation sends the application details from the job board to StackOne, which then forwards them to the appropriate ATS platform for processing. This allows candidates to apply for jobs directly through your job board, ensuring that their applications are correctly submitted and tracked by the respective ATS platform.
 
-- In this step of job board process we are enabling candidates to submit their job applications. This operation sends the application details from the job board to StackOne, which then forwards them to the appropriate ATS platform for processing.
-
-- This allows candidates to apply for jobs directly through your job board, ensuring that their applications are correctly submitted and tracked by the respective ATS platform.
+- API Call: [POST /ats/applications](https://docs.stackone.com/reference/ats_create_application)
 
 ## Conclusion
 
 In this walkthrough, we explored the process of creating a job board that integrates with multiple ATS platforms like Greenhouse and Ashby. By using StackOne’s unified API, we minimized the effort required to connect these systems. StackOne streamlined the integration process, enabling us to manage jobs and applications across various platforms without the need for custom coding or extensive maintenance.
-
-StackOne made building and maintaining the job board straightforward, allowing us to focus on delivering a seamless user experience while keeping everything responsive and up-to-date with ease.
